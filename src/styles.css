@@ -14,3 +14,18 @@ body {
   display: block;
   height: 100%;
 }
+
+a,
+button {
+  cursor: pointer;
+}
+
+#header {
+  background: rgba(43, 35, 8, 1);
+}
+
+#mySwiper,
+.grid {
+  background: #fffca6;
+  background: radial-gradient(circle, rgba(255, 252, 166, 1) 0%, rgba(43, 35, 8, 1) 100%);
+}
