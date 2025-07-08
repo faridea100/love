@@ -132,6 +132,11 @@ register();
     }
   `,
   template: `
+  <div style="position:absolute; left:-1000px;">
+    <img src="/fashionlove.jpg" />
+    <h1>FashionLove</h1>
+    <p>App about Fashion and style. Check out now <a href="https://subtle-klepon-8e5160.netlify.app/home">https://subtle-klepon-8e5160.netlify.app/home</a></p>
+  </div>
     <app-header (op)="settingsVisibility($event)"></app-header>
     @if(photoService.pics.status() === 'resolved') {
     <div #page id="page">
@@ -228,7 +233,7 @@ register();
           <swiper-slide lazy="true">
             <div class="relative">
               <!-- <div class="badge"></div> -->
-              <img [src]="img" [alt]="'FashionLove ' + i" loading="lazy" />
+              <img [src]="img" [alt]="'FashionLove ' + (i+1)" loading="lazy" />
               <div id="swiperBot" class="flex justify-content items-center">
                 <div class="flex">
                   <a
@@ -276,7 +281,7 @@ register();
                 </div>
                 <button
                   class="btn-download btn-secondary"
-                  (click)="this.photoService.selectedPic.set({img,name:i})"
+                  (click)="this.photoService.selectedPic.set({img,name:(i+1)})"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -328,13 +333,13 @@ register();
             @for(img of imgs; track img; let i= $index) {
             <div
               class="flex items-center p-2 md:p-7 md:gap-8 rounded-2xl"
-              [title]="'FashionLove ' + i"
+              [title]="'FashionLove ' + (i+1)"
               (click)="updateSlide(i)"
             >
               <div>
                 <img
                   class="shadow-xl rounded-md"
-                  [alt]="'FashionLove ' + i"
+                  [alt]="'FashionLove ' + (i+1)"
                   [src]="img"
                 />
               </div>
@@ -439,11 +444,13 @@ export class Imgs {
         setTimeout(() => {
           this.isDownloading.set(false);
         }, 1400);
+        this.photoService.selectedPic.set({ img: '', name: 0 });
       } else if (this.pic().status() === 'error') {
         this.isDownloading.set(false);
       } else if (this.pic().status() === 'loading') {
         this.isDownloading.set(true);
       }
+
     }
 
     let ll = this.pic()?.progress()?.loaded as number;

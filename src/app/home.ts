@@ -9,13 +9,18 @@ import { Renderer2 } from '@angular/core';
   selector: 'app-home',
   imports: [Header, NgTemplateOutlet],
   template: `
+  <div style="position:absolute; left:-1000px;">
+    <img src="/fashionlove.jpg" />
+    <h1>FashionLove</h1>
+    <p>App about Fashion and style. Check out now <a href="https://subtle-klepon-8e5160.netlify.app/home">https://subtle-klepon-8e5160.netlify.app/home</a></p>
+  </div>
     <app-header (op)="settingsVisibility($event)"></app-header>
     <ng-template #list let-imgs="imgs">
       <div class="imgList grid  p-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 ">
         @for(img of imgs; track img; let i= $index) {
         <div
           class="flex relative items-center p-2 rounded-md md:p-7 md:gap-8 "
-          [title]="'FashionLove ' + i"
+          [title]="'FashionLove ' + (i+1)"
         >
           <span class="w-full rounded-md border-b-1 border-white-100 relative">
             <span
@@ -32,7 +37,7 @@ import { Renderer2 } from '@angular/core';
             </a>
             <button
               class="btn-download btn-secondary"
-              (click)="this.photoService.selectedPic.set({img,name:i})"
+              (click)="this.photoService.selectedPic.set({img,name:(i+1)})"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
