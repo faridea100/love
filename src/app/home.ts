@@ -1,7 +1,4 @@
-import {
-  Component,
-  inject
-} from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { Photo } from './photo';
 import { Header } from './shared/header';
 import { Router } from '@angular/router';
@@ -14,27 +11,46 @@ import { Renderer2 } from '@angular/core';
   template: `
     <app-header (op)="settingsVisibility($event)"></app-header>
     <ng-template #list let-imgs="imgs">
-      <div class="grid  p-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 ">
+      <div class="imgList grid  p-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 ">
         @for(img of imgs; track img; let i= $index) {
-        <a
+        <div
           class="flex relative items-center p-2 rounded-md md:p-7 md:gap-8 "
           [title]="'FashionLove ' + i"
-          (click)="router.navigate(['/img/' + i])"
         >
           <span class="w-full rounded-md border-b-1 border-white-100 relative">
-            <span id="aaa"></span>
             <span
               class="badge shadow-xl flex w-8 h-8 justify-center items-center absolute"
               >{{ i + 1 }}</span
             >
-            <img
-              class="shadow-xl rounded-md"
-              [alt]="'FashionLove ' + i"
-              [src]="img"
-              loading="lazy"
-            />
+            <a (click)="router.navigate(['/img/' + i])">
+              <img
+                class="shadow-xl rounded-md"
+                [alt]="'FashionLove ' + i"
+                [src]="img"
+                loading="lazy"
+              />
+            </a>
+            <button
+              class="btn-download btn-secondary"
+              (click)="this.photoService.selectedPic.set({img,name:i})"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path d="M16 16l-4 4-4-4" />
+                <path d="M12 12v8" />
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 4 16.3" />
+              </svg>
+            </button>
           </span>
-        </a>
+        </div>
         }
       </div>
     </ng-template>
@@ -83,9 +99,16 @@ import { Renderer2 } from '@angular/core';
     }
   `,
   styles: `
-    .grid {
-        background: var(--blue-lite);
+
+    .imgList.grid {
+      color: var(--blue);
+      background: var(--blue-lite);
+  img {
+    &:after {
+      border-color: var(--blue-dark);
     }
+  }
+}
     .badge {
       color: var(--blue-dark);
       background: var(--blue-lite);
@@ -98,6 +121,36 @@ export class Home {
   router = inject(Router);
   photoService = inject(Photo);
   r2 = inject(Renderer2);
+  selectedPic = computed(() => this.photoService.selectedPic());
+  pic = computed(() => this.photoService.pic);
+  imgLoaded = signal<number>(0);
+  isDownloading = signal<boolean>(false);
+
+  constructor() {
+    this.photoService.selectedPic.set({ img: '', name: 0 });
+  }
+
+  ttt = effect(() => {
+    if (this.selectedPic().img) {
+      console.log('this.pic()', this.pic());
+      if (this.pic().value() && this.pic().status() !== 'error') {
+        this.isDownloading.set(true);
+        console.log('pic', this.pic().value());
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(this.pic().value());
+        a.download = `Fashion-${this.selectedPic().name.toString()}`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        setTimeout(() => {
+          this.isDownloading.set(false);
+        }, 1400);
+      } else if (this.pic().status() === 'error') {
+        this.isDownloading.set(false);
+      } else if (this.pic().status() === 'loading') {
+        this.isDownloading.set(true);
+      }
+    }
+  });
   settingsVisibility(toggle: boolean) {
     let bd = document.getElementsByTagName('html') as any;
     if (toggle) {

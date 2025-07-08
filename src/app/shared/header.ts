@@ -97,26 +97,26 @@ import { Photo } from '../photo';
 
     <ng-template #settingsTempRef>
       <div class="mb-5">
-        <a
+        <div
           class="facebook-card w-full"
-          target="_blank"
         >
           <img class="w-full" [src]="photoService.pics.value().profile" />
-        </a>
+        </div>
       </div>
       <div class="mb-5">
         <div class="grid  grid-cols-2">
           <div class="flex p-2">
             <a
               class="btn p-2 flex btn-outline btn-wa gap-2"
-              href="https://wa.me/?text=Check%20this%20out%20👉%20https://subtle-klepon-8e5160.netlify.app/home"
+              href="https://wa.me/?text=FashionLove%20https://subtle-klepon-8e5160.netlify.app/home"
               target="_blank"
               rel="noopener"
               ><img
                 class=""
                 [alt]="'WhatsApp'"
                 [title]="'WhatsApp'"
-                src="https://static.whatsapp.net/rsrc.php/yZ/r/JvsnINJ2CZv.svg"
+                [height]="'20px'"
+                src="/wa.svg"
             /></a>
           </div>
           <div class="flex p-2">
@@ -130,7 +130,8 @@ import { Photo } from '../photo';
                 class=""
                 [alt]="'Facebook'"
                 [title]="'Facebook'"
-                src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg"
+                [height]="'20px'"
+                src="/fb.svg"
               />
             </a>
           </div>

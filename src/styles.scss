@@ -58,15 +58,43 @@ button {
   color: $text-Color;
 }
 
-.grid {
+.loader-wrapper {
+  height:100vh;
+}
+
+.imgList.grid {
+  > div {
+    position: relative;
+    >div {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   img {
     content:"";
     min-height: 150px;
     &:after {
-      content:"Loading...";
-
+      content: "";
+      position: absolute;
+          top: 50%;
+         
+    left: 50%;
+     transform: translate(-50%,50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
   }
+}
+
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .btn-primary {
@@ -112,3 +140,6 @@ button {
 }
 
 
+.btn-download {
+    position:absolute;bottom:10px;right:10px;
+  }
