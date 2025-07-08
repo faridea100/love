@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import angular from '@analogjs/vite-plugin-angular';
-import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -11,8 +10,9 @@ export default defineConfig(({ mode }) => ({
     mainFields: ['module'],
   },
   plugins: [
-    angular(),
-    tailwindcss(),
+    angular({
+        inlineStylesExtension: 'scss',
+      }),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
@@ -38,4 +38,3 @@ export default defineConfig(({ mode }) => ({
     })
   ],
 }));
-

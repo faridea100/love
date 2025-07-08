@@ -1,11 +1,11 @@
-<svg viewBox="0 0 43 16" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 70 16" xmlns="http://www.w3.org/2000/svg">
 <defs>
     <linearGradient id="verticalGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#007aff" />  <!-- Top color -->
-      <stop offset="100%" stop-color="#bcd8f7" /> <!-- Bottom color -->
+      <stop offset="0%" stop-color="#071a2e" />  <!-- Top color -->
+      <stop offset="100%" stop-color="#007aff" /> <!-- Bottom color -->
     </linearGradient>
   </defs>
   <text x="0" y="15" font-family="Pacifico, cursive" font-size="20" fill="url(#verticalGradient)">
-    Love
+    Fashion
   </text>
 </svg>
