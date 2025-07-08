@@ -172,9 +172,9 @@ export class Home {
         a.download = `Fashion-${this.selectedPic().name.toString()}`;
         a.click();
         URL.revokeObjectURL(a.href);
-        // setTimeout(() => {
-        //   this.isDownloading.set(false);
-        // }, 1400);
+        setTimeout(() => {
+          this.isDownloading.set(false);
+        }, 1400);
       } else if (this.pic().status() === 'error') {
         this.isDownloading.set(false);
       } else if (this.pic().status() === 'loading') {
