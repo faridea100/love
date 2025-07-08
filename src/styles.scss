@@ -33,7 +33,6 @@ body {
   background: #4d4d4d;
 }
 
-
 a,
 button {
   cursor: pointer;
@@ -42,45 +41,72 @@ button {
 .btn {
   border-radius: 4px;
 }
-#page{
+
+#page {
   height: calc(100vh - 50px);
-  margin-top:50px;
+  margin-top: 50px;
 }
 
-.aaa {
-  position: absolute; left: 0;right: 0;top: 0;bottom: 0; 
+#list_popup_overlay {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: -50px;
+  z-index: 988;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-@mixin button-style($bg,$text-Color:white){
+.progress-wrapper {
+  position: fixed;
+  z-index: 1555;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  color: white;
+
+  #progress {
+    position: relative;z-index: 992;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+}
+
+@mixin button-style($bg, $text-Color:white) {
   border-radius: 4px;
   padding: 2px 6px;
-  background:$bg;
+  background: $bg;
   color: $text-Color;
 }
 
 .loader-wrapper {
-  height:100vh;
+  height: 100vh;
 }
 
 .imgList.grid {
-  > div {
+  >div {
     position: relative;
+
     >div {
-      display:flex;
+      display: flex;
       justify-content: center;
       align-items: center;
     }
   }
+
   img {
-    content:"";
+    content: "";
     min-height: 150px;
+
     &:after {
       content: "";
       position: absolute;
-          top: 50%;
-         
-    left: 50%;
-     transform: translate(-50%,50%);
+      top: 50%;
+
+      left: 50%;
+      transform: translate(-50%, 50%);
       width: 20px;
       height: 20px;
       border: 2px solid transparent;
@@ -93,42 +119,55 @@ button {
 
 
 @keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .btn-primary {
-  @include button-style(var(--blue-dark),var(--blue-lite));
-    background-color: var(--blue-dark);
-    color:  var(--blue-lite);
-    svg {
-      path,
-      line {
-        stroke: var(--blue);
-        fill: none;
-      }
+  @include button-style(var(--blue-dark), var(--blue-lite));
+  background-color: var(--blue-dark);
+  color: var(--blue-lite);
+
+  svg {
+
+    path,
+    line {
+      stroke: var(--blue);
+      fill: none;
     }
   }
-.btn-outline{
+}
+
+.btn-outline {
   padding: 2px 6px;
 }
-.btn-wa{
+
+.btn-wa {
   border: 1px solid #25d366
 }
-.btn-fb{
+
+.btn-fb {
   border: 1px solid #0866ff
 }
+
 .btn-secondary {
-  @include button-style(var(--blue-lite),var(--blue-dark));
-    background-color: var(--blue-lite);
-    svg {
-      path,
-      line {
-        stroke: var(--blue);
-        fill: none;
-      }
+  @include button-style(var(--blue-lite), var(--blue-dark));
+  background-color: var(--blue-lite);
+
+  svg {
+
+    path,
+    line {
+      stroke: var(--blue);
+      fill: none;
     }
   }
+}
 
 #header {
   background: var(--blue-dark);
@@ -141,5 +180,7 @@ button {
 
 
 .btn-download {
-    position:absolute;bottom:10px;right:10px;
-  }
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

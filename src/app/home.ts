@@ -60,6 +60,10 @@ import { Renderer2 } from '@angular/core';
         [ngTemplateOutlet]="list"
         [ngTemplateOutletContext]="{ imgs: photoService.pics.value().images }"
       ></ng-container>
+
+      <ng-container
+        [ngTemplateOutlet]="isDownloading() ? download : null"
+      ></ng-container>
     </div>
     } @else if(photoService.pics.error()) {
     <div class="loader-wrapper flex justify-center items-center w-full ">
@@ -90,6 +94,8 @@ import { Renderer2 } from '@angular/core';
         </button>
       </div>
     </div>
+
+    
     } @else if(photoService.pics.status() === 'loading') {
     <div class="loader-wrapper flex justify-center items-center w-full ">
       <div class="loader">
@@ -97,9 +103,34 @@ import { Renderer2 } from '@angular/core';
       </div>
     </div>
     }
+
+
+      <ng-template #download>
+      <div class="progress-wrapper flex justify-center items-center">
+        <div id="progress" class="flex gap-2 justify-center items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="none"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+          >
+            <path d="M16 16l-4 4-4-4" />
+            <path d="M12 12v8" />
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 4 16.3" />
+          </svg>
+          <p>Downloading...</p>
+        </div>
+        <div id="list_popup_overlay"></div>
+      </div>
+      
+    </ng-template>
   `,
   styles: `
-
     .imgList.grid {
       color: var(--blue);
       background: var(--blue-lite);
@@ -141,9 +172,9 @@ export class Home {
         a.download = `Fashion-${this.selectedPic().name.toString()}`;
         a.click();
         URL.revokeObjectURL(a.href);
-        setTimeout(() => {
-          this.isDownloading.set(false);
-        }, 1400);
+        // setTimeout(() => {
+        //   this.isDownloading.set(false);
+        // }, 1400);
       } else if (this.pic().status() === 'error') {
         this.isDownloading.set(false);
       } else if (this.pic().status() === 'loading') {

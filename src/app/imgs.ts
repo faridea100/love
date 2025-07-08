@@ -32,18 +32,7 @@ register();
   imports: [Header, NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styles: `
-  .progress-wrapper{
-        position: absolute;
-    z-index: 1555;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    color:white;
-    #progress{
-      background: rgba(0, 0, 0, 0.4) ; padding:4px 6px; border-radius:4px;
-    }
-  }
+  
   
 #swiperWrapper {
   position: relative;
@@ -102,10 +91,7 @@ register();
   }
 }
 
-  #list_popup_overlay {
-    position:absolute; top:50px;left:0;right:0;bottom:-50px;z-index: 988;
-        background: rgba(0, 0, 0, 0.6);
-  }
+
   #list_popup{
     position: absolute;
     bottom: 0;
@@ -359,31 +345,29 @@ register();
       </div>
     </ng-template>
 
-    <ng-template #download let-prg="prg">
+    <ng-template #download>
       <div class="progress-wrapper flex justify-center items-center">
-        <div class="flex justify-center items-center">
-          <div id="progress" class="flex  justify-center items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              fill="none"
-              stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              viewBox="0 0 24 24"
-            >
-              <path d="M16 16l-4 4-4-4" />
-              <path d="M12 12v8" />
-              <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 4 16.3" />
-            </svg>
-            <p>{{ prg }}Downloading...</p>
-          </div>
-          <!-- <div class="progress-bar rounded-xl h-6 bg-white " [style.width]="prg()">{{ prg() }}</div> -->
+        <div id="progress" class="flex gap-2 justify-center items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="none"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+          >
+            <path d="M16 16l-4 4-4-4" />
+            <path d="M12 12v8" />
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 4 16.3" />
+          </svg>
+          <p>Downloading...</p>
         </div>
+        <div id="list_popup_overlay"></div>
       </div>
-      <div id="list_popup_overlay"></div>
+      
     </ng-template>
   `,
 })
