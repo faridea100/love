@@ -164,7 +164,7 @@ register();
             <button class=" btn-primary" (click)="openListPopup()">OPEN</button>
           </div>
           <div class="bg-white inline-block rounded-sm px-2">
-            {{ activeImg() }}/{{ photoService.pics.value().images.length + 1 }}
+            {{ activeImg() + 1}}/{{ photoService.pics.value().images.length + 1 }}
           </div>
           <!-- <div>id</div> -->
         </div>
