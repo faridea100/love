@@ -135,7 +135,7 @@ register();
   <div style="position:absolute; left:-1000px;">
     <img src="/fashionlove.jpg" />
     <h1>FashionLove</h1>
-    <p>App about Fashion and style. Check out now <a href="https://subtle-klepon-8e5160.netlify.app/home">https://subtle-klepon-8e5160.netlify.app/home</a></p>
+    <p>App about Fashion and style. Check out now <a href="https://subtle-klepon-8e5160.netlify.app/img">FashionLove Gallery</a></p>
   </div>
     <app-header (op)="settingsVisibility($event)"></app-header>
     @if(photoService.pics.status() === 'resolved') {
@@ -164,7 +164,7 @@ register();
             <button class=" btn-primary" (click)="openListPopup()">OPEN</button>
           </div>
           <div class="bg-white inline-block rounded-sm px-2">
-            {{ activeImg() + 1}}/{{ photoService.pics.value().images.length + 1 }}
+            {{ activeImg()}}/{{ photoService.pics.value().images.length }}
           </div>
           <!-- <div>id</div> -->
         </div>
@@ -172,11 +172,77 @@ register();
           [ngTemplateOutlet]="sld"
           [ngTemplateOutletContext]="{ imgs: photoService.pics.value().images }"
         ></ng-container>
+        <div id="swiperBot" class="flex justify-content items-center">
+                <div class="flex">
+                  <a
+                    class="btn p-2 flex btn-outline  gap-2"
+                    [href]="
+                      'https://wa.me/?text=FashionLove%20https://subtle-klepon-8e5160.netlify.app/img/' +
+                      activeImg()
+                    "
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="32"
+                      height="32"
+                      fill="#25D366"
+                    >
+                      <path
+                        d="M20.52 3.48A11.86 11.86 0 0012 0C5.37 0 0 5.37 0 12a11.9 11.9 0 001.61 6l-1.6 6 6-1.6A11.9 11.9 0 0012 24c6.63 0 12-5.37 12-12a11.86 11.86 0 00-3.48-8.52zM12 22a9.87 9.87 0 01-5.1-1.4l-.36-.21-3.57 1.01 1.02-3.49-.23-.37A9.88 9.88 0 1122 12c0 5.51-4.49 10-10 10zm5.46-7.28l-1.78-.52a1.16 1.16 0 00-1.11.3l-.57.58a8.25 8.25 0 01-4.28-4.27l.58-.57a1.17 1.17 0 00.3-1.11l-.52-1.78A1.17 1.17 0 008.44 7H7.11A1.11 1.11 0 006 8.11c0 5.51 4.49 10 10 10a1.11 1.11 0 001.11-1.11v-1.33a1.17 1.17 0 00-.65-1.05z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    class="btn p-2 flex btn-outline  gap-2"
+                    [href]="
+                      'https://www.facebook.com/sharer/sharer.php?u=https://subtle-klepon-8e5160.netlify.app/img/' +
+                      activeImg()
+                    "
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="32"
+                      height="32"
+                      fill="#1877F2"
+                    >
+                      <path
+                        d="M22.675 0h-21.35C.596 0 0 .597 0 1.333v21.333C0 23.403.596 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.404 24 24 23.403 24 22.667V1.333C24 .597 23.404 0 22.675 0z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                <button
+                  class="btn-download btn-secondary"
+                  (click)="this.photoService.selectedPic.set({img:photoService.pics.value().images[activeImg()-1],name:(activeImg())})"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M16 16l-4 4-4-4" />
+                    <path d="M12 12v8" />
+                    <path
+                      d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 4 16.3"
+                    />
+                  </svg>
+                </button>
+              </div>
       </div>
       <ng-container #list_vref></ng-container>
       <ng-container
         [ngTemplateOutlet]="isDownloading() ? download : null"
-        [ngTemplateOutletContext]="{ prg: imgLoaded() }"
       ></ng-container>
     </div>
     } @else if(photoService.pics.error()) {
@@ -234,73 +300,6 @@ register();
             <div class="relative">
               <!-- <div class="badge"></div> -->
               <img [src]="img" [alt]="'FashionLove ' + (i+1)" loading="lazy" />
-              <div id="swiperBot" class="flex justify-content items-center">
-                <div class="flex">
-                  <a
-                    class="btn p-2 flex btn-outline  gap-2"
-                    [href]="
-                      'https://wa.me/?text=FashionLove%20https://subtle-klepon-8e5160.netlify.app/imgs/' +
-                      i
-                    "
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="32"
-                      height="32"
-                      fill="#25D366"
-                    >
-                      <path
-                        d="M20.52 3.48A11.86 11.86 0 0012 0C5.37 0 0 5.37 0 12a11.9 11.9 0 001.61 6l-1.6 6 6-1.6A11.9 11.9 0 0012 24c6.63 0 12-5.37 12-12a11.86 11.86 0 00-3.48-8.52zM12 22a9.87 9.87 0 01-5.1-1.4l-.36-.21-3.57 1.01 1.02-3.49-.23-.37A9.88 9.88 0 1122 12c0 5.51-4.49 10-10 10zm5.46-7.28l-1.78-.52a1.16 1.16 0 00-1.11.3l-.57.58a8.25 8.25 0 01-4.28-4.27l.58-.57a1.17 1.17 0 00.3-1.11l-.52-1.78A1.17 1.17 0 008.44 7H7.11A1.11 1.11 0 006 8.11c0 5.51 4.49 10 10 10a1.11 1.11 0 001.11-1.11v-1.33a1.17 1.17 0 00-.65-1.05z"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    class="btn p-2 flex btn-outline  gap-2"
-                    [href]="
-                      'https://www.facebook.com/sharer/sharer.php?u=https://subtle-klepon-8e5160.netlify.app/imgs/' +
-                      i
-                    "
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="32"
-                      height="32"
-                      fill="#1877F2"
-                    >
-                      <path
-                        d="M22.675 0h-21.35C.596 0 0 .597 0 1.333v21.333C0 23.403.596 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.404 24 24 23.403 24 22.667V1.333C24 .597 23.404 0 22.675 0z"
-                      />
-                    </svg>
-                  </a>
-                </div>
-                <button
-                  class="btn-download btn-secondary"
-                  (click)="this.photoService.selectedPic.set({img,name:(i+1)})"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M16 16l-4 4-4-4" />
-                    <path d="M12 12v8" />
-                    <path
-                      d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 4 16.3"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
           </swiper-slide>
 
@@ -410,7 +409,7 @@ export class Imgs {
         this.swiperEl = document.getElementById('sc') as SwiperContainer;
         this.swiperEl?.swiper.slideTo(this.id());
         this.swiperEl?.swiper.on('slideChange', () => {
-          this.activeImg.set(this.swiperEl?.swiper?.activeIndex);
+          this.activeImg.set(this.swiperEl?.swiper?.activeIndex+1);
           this.html[0].scrollTop = 0;
         });
         console.log('new slide no.', this.id());

@@ -45,11 +45,11 @@ import { Photo } from '../photo';
     >
       <div>
         <a (click)="router.navigate(['/home'])">
-          <span class="flex"
-            ><img [src]="'/logo0.svg'" [width]="'120'" /><img
-              [src]="'/logo.svg'"
-              [width]="'60'"
-            /> </span
+          <span class="flex justify-start"
+            ><img [src]="'/logo0.svg'" [width]="'120'" />
+            <img [src]="'/logo.svg'" [width]="'60'"
+            />
+            <img [src]="'/logo-lily.png'" [width]="'53'" /></span
         ></a>
       </div>
       <div>

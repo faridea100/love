@@ -16,6 +16,7 @@
   },
   "private": true,
   "dependencies": {
+    "@analogjs/platform": "^1.19.1",
     "@analogjs/router": "^1.19.0",
     "@angular/animations": "^20.0.0",
     "@angular/common": "^20.0.0",

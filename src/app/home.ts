@@ -12,7 +12,7 @@ import { Renderer2 } from '@angular/core';
   <div style="position:absolute; left:-1000px;">
     <img src="/fashionlove.jpg" />
     <h1>FashionLove</h1>
-    <p>App about Fashion and style. Check out now <a href="https://subtle-klepon-8e5160.netlify.app/home">https://subtle-klepon-8e5160.netlify.app/home</a></p>
+    <p>App about Fashion and style. Check out now <a href="https://subtle-klepon-8e5160.netlify.app/home">FashionLove Home</a></p>
   </div>
     <app-header (op)="settingsVisibility($event)"></app-header>
     <ng-template #list let-imgs="imgs">
