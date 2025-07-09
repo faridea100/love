@@ -19,6 +19,7 @@ export default defineConfig({
       manifest: {
         name: 'FashionLove',
         short_name: 'FashionLove',
+        id: '/',                      // ✅ Add this line
         start_url: '/',
         display: 'standalone',
         background_color: '#071a2e',
