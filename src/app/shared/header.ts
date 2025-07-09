@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, output, signal } from '@angular/core';
+import { Component, inject, OnInit, output, Renderer2, signal } from '@angular/core';
 import { InstallButton } from '../install-button';
 import { Router } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
@@ -44,7 +44,7 @@ import { Photo } from '../photo';
       class="flex px-3 justify-between items-center border-b-2 border-white-300"
     >
       <div>
-        <a (click)="router.navigate(['/home'])">
+        <a (click)="settingsVisibility()">
           <span class="flex justify-start"
             ><img [src]="'/logo0.svg'" [width]="'120'" />
             <img [src]="'/logo.svg'" [width]="'60'"
@@ -180,19 +180,22 @@ import { Photo } from '../photo';
     </ng-template>
   `,
 })
-export class Header implements OnInit {
+export class Header {
   op = output<boolean>();
   settingsShow = signal(false);
   router = inject(Router);
   photoService = inject(Photo);
-  pfp: string = '';
-
-  ngOnInit(): void {
-    //this.pfp = this.photoService.pics.value().proile
-  }
+  r2=inject(Renderer2)
 
   toggleSettings() {
     this.settingsShow.update((prev) => !prev);
     this.op.emit(this.settingsShow());
+  }
+
+   settingsVisibility() {
+    this.router.navigate(['/home'])
+    let bd = document.getElementsByTagName('html') as any;
+    bd[0].scrollTop = 0;
+    this.r2.setStyle(bd[0], 'overflow-y', 'auto');
   }
 }
